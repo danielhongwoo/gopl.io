@@ -12,7 +12,7 @@ import (
 	"math"
 	"math/rand"
 	"os"
-  "strconv"
+	"strconv"
 )
 
 //!-main
@@ -38,21 +38,21 @@ func main() {
 	// the pseudo-random number generator using the current time.
 	// Thanks to Randall McPherson for pointing out the omission.
 	rand.Seed(time.Now().UTC().UnixNano())
-  cycles := 5
+	cycles := 5
 
 	if len(os.Args) > 1 && os.Args[1] == "web" {
 		//!+http
 		handler := func(w http.ResponseWriter, r *http.Request) {
-      if keys, ok := r.URL.Query()["cycles"]; ok {
-        if num, err := strconv.Atoi(keys[0]); err == nil {
-          cycles = num
-        }
-      }
+			if keys, ok := r.URL.Query()["cycles"]; ok {
+				if num, err := strconv.Atoi(keys[0]); err == nil {
+					cycles = num
+				}
+			}
 			lissajous(w, cycles)
 		}
 		http.HandleFunc("/", handler)
 		//!-http
-    log.Fatal(http.ListenAndServe("localhost:8000", nil))
+		log.Fatal(http.ListenAndServe("localhost:8000", nil))
 		return
 	}
 	//!+main

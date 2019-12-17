@@ -12,14 +12,14 @@ import (
 )
 
 func main() {
-  file, err := os.Create("out")
-  if err != nil {
-    fmt.Fprintf(os.Stderr, "cannot make file: %v\n", err)
-    return
-  }
-  fetch_and_report(file)
-  fetch_and_report(file)
-  file.Close()
+	file, err := os.Create("out")
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "cannot make file: %v\n", err)
+		return
+	}
+	fetch_and_report(file)
+	fetch_and_report(file)
+	file.Close()
 }
 
 func fetch_and_report(file *os.File) {

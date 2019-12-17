@@ -8,8 +8,8 @@ import (
 )
 
 type Word struct {
-  count     int
-  filenames []string
+	count     int
+	filenames []string
 }
 
 func main() {
@@ -38,26 +38,26 @@ func main() {
 func countLines(f *os.File, counts map[string]*Word) {
 	input := bufio.NewScanner(f)
 	for input.Scan() {
-    k := input.Text()
-    _, found := counts[k]
-    if found {
-		  counts[k].count++
-      names := counts[k].filenames
+		k := input.Text()
+		_, found := counts[k]
+		if found {
+			counts[k].count++
+			names := counts[k].filenames
 
-      found = false
-      for _, v := range names {
-        if v == f.Name() {
-          found = true
-          break;
-        }
-      }
-      if found == false {
-        counts[k].filenames = append(counts[k].filenames, f.Name())
-      }
-    } else {
-      counts[k] = new(Word)
-		  counts[k].count = 1
-      counts[k].filenames = []string{f.Name()}
-    }
+			found = false
+			for _, v := range names {
+				if v == f.Name() {
+					found = true
+					break
+				}
+			}
+			if found == false {
+				counts[k].filenames = append(counts[k].filenames, f.Name())
+			}
+		} else {
+			counts[k] = new(Word)
+			counts[k].count = 1
+			counts[k].filenames = []string{f.Name()}
+		}
 	}
 }
